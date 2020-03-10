@@ -16,7 +16,7 @@ and
 the method should print a sequence like
 3 2 3 1
 
-Made an efficient  implementation of this method running in time O(n) tgat prints out of
+Made an efficient  implementation of this method running in time O(n) that prints out of
 a sequence of O(n) many rotations, where n is the number of keys1
 
 # Part 2 of Project:
