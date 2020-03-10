@@ -1,6 +1,8 @@
+package com.company;
+
 import java.util.Comparator;
 import java.util.ArrayList;
-public class TreeSet<K> implements Set<K> {
+public class TreeSet<K> implements Set<K>, PriorityQueue<K> {
     protected LinkedBinaryTree<K> tree = new LinkedBinaryTree<>();
     private Comparator<K> comp;
 
@@ -133,12 +135,23 @@ public class TreeSet<K> implements Set<K> {
 		}
 	}
 
-    /*
-    public K min(){}
-    public K removeMin(){}
-    public void insert(K key){}
-    public boolean isEmpty(){}
-    *
-    * your implementation goes here
-    */
+    public K min(){
+        return treeMin(root()).getElement();
+    }
+
+    public K removeMin(){
+        return remove(min());
+    }
+
+    public void insert(K key){
+        put(key);
+    }
+
+    public boolean isEmpty(){
+        return (size() == 0);
+    }
+
+    // your implementation goes here
+
+
 }

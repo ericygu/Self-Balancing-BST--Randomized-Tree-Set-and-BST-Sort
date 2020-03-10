@@ -1,3 +1,5 @@
+package com.company;
+
 public interface PriorityQueue<K> {
     public boolean isEmpty();
     public int size();

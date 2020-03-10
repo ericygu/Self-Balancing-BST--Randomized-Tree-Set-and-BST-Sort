@@ -1,3 +1,5 @@
+package com.company;
+
 public interface Set<K> {
     public boolean contains(K key) throws IllegalArgumentException;
     public boolean put(K key) throws IllegalArgumentException;

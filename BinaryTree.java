@@ -1,3 +1,5 @@
+package com.company;
+
 public interface BinaryTree<K> {
     public Position<K> root();
     public Position<K> left(Position<K> p);

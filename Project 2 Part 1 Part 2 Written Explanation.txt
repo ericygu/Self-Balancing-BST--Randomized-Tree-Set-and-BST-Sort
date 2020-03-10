@@ -1,0 +1,103 @@
+Part 1:
+
+My algorithm first initializes r1 and r2 – the roots of the respective trees. 
+This will be constant time, and these essentially serve as pointers that start at the root node of the binary search tree. 
+I observed that the pattern to print 3231 in the example tree for hw2 relied on 2 phases: 
+first, to turn the tree into a tree with only right children, 
+second, then to use the result tree to find out what nodes needed to be rotated in the tree with only right children to actualize this. 
+My first while loop does the former part and it is O(n) as it must traverse and produce a tree with only right children, 
+which is the worst case scenario for a BST. The while loop operates based on if at the pointer node if there are children. 
+From then, I use constant time operations of if and else if, including the things in both these cases to do the operations I need. 
+This makes it so that the entire while loop does not go past O(n). 
+The if statement checks if there isn’t a left node (which seems to be most of the cases in the example), and if this is the case, 
+we can move to the right node and check. 
+The if else statement is for when there is a left node, 
+and then prints that left element for the first tree and then rotates the tree based off the left node,
+then goes back to the pointer node r2 after the rotation.
+After all the elements are printed to make the tree with only right children,
+the second phase in the operation commences.
+The second while loop does the exact same thing as the first while loop, but there’s a catch. 
+I noticed that if we take the result tree on the right of the example in hw2 and print the same elements like in turning the first tree to a tree with only right children, 
+it would give us the incorrect elements printed because it would be printing the children, instead of seeming the parents that would needed to be printed. 
+To solve this, instead of left.getElement() I just use getElement() in contrast to the code for the first phase, 
+which accesses the parent instead of the left child of the parent. It would also be printed in reverse order. 
+
+Therefore, to solve this, I used a stack to push the elements, which would enable me to print things in reverse order. 
+Since the stack will take constant time (push, pop: O(1) ), it is not a detriment to my runtime and complexity. 
+I would then; instead of immediately print the elements push all the elements. After all the elements are inserted into the stack, 
+I can just pop them one by one. 
+
+All these operations together make up O(n)! Voila. (O(n) + O(1) = O(n)..etc.)
+
+
+Part 2:
+Some test cases:
+For a random integer arraylist from -2000000 to 2000000:
+case 1:
+removeMin took 6942 milliseconds
+inorder took 6791 milliseconds
+
+Balanced:
+
+splay remove min took 20321 milliseconds
+splay inorder took 18135 milliseconds
+
+case 2:
+removeMin took 7144 milliseconds
+inorder took 6758 milliseconds
+
+Balanced: 
+
+splay remove min took 16847 milliseconds
+splay inorder took 18737 milliseconds
+
+case 3:
+removeMin took 8384 milliseconds
+inorder took 7996 milliseconds
+
+Balanced:
+
+splay remove min took 24249 milliseconds
+splay inorder took 27568 milliseconds
+
+For a random integer arraylist from -1000000 to 1000000:
+removeMin took 3114 milliseconds
+inorder took 2892 milliseconds
+
+Balanced:
+
+splay remove min took 6591 milliseconds
+splay inorder took 8836 milliseconds
+
+For a random integer arraylist from -1000 to 1000:
+removeMin took 35 milliseconds
+inorder took 6 milliseconds
+
+Balanced:
+
+splay remove min took 8 milliseconds
+splay inorder took 8 milliseconds
+
+Overall, for the majority of test cases, it seems that inorder without balancing took the least amount of time on my computer.
+Followed by that, with the balanced splay trees, it seemed to be quite similar, 
+sometimes flip-flopping although it seemed to me most of the time splay removemin
+was quicker compared to splay inorder. 
+
+Overall, removeMin and inorder were faster unbalanced than balanced in the splay trees, although for extremely small cases it seems that the balanced trees
+were faster. I think this would be the case because the more cases there are of elements, the more the balanced trees would need to rebalance, therefore adding
+to the time it would take to run the program for this task. Rebalancing all elements for tree height and then selecting would be on average case O(n log n) 
+in splay tree. This would be in contrast to an unbalanced tree, which one could simply iterate in the priority queue the elements from the min so it would be O(n)
+(as is the case for inorder in an unbalanced tree).
+
+I think inorder seems to be a faster than removeMin in the unbalanced tree because of how removeMin requires iterations across the tree
+whereas inorder takes advantage of natural BST structure, as BST read inorder gives the min to max. This would however be only if it is in a more balanced nature,
+and since unbalanced trees are prone to multiple randomization, it is inconclusive, and depending on the specific tree. 
+
+I think balanced inorder would be slower than balanced removeMin, but only purely based off of my test cases. Not sure why in terms of theory, which
+makes me think that balanced inorder should be faster because of the natural benefits of BST of being in order if read in order.
+
+Of course, results will not always be the same due to the randomization of the arraylist integers that was 
+required in the main method. 
+
+
+

@@ -1,3 +1,5 @@
+package com.company;
+
 public class LinkedBinaryTree<K> implements BinaryTree<K> {
     protected static class Node<K> implements Position<K> {
         private K element;
@@ -85,6 +87,7 @@ public class LinkedBinaryTree<K> implements BinaryTree<K> {
         return node.getRight();
     }
 
+    //use left child to call right child or vice versa
     public Position<K> sibling(Position<K> p) throws IllegalArgumentException {
         Position<K> parent = parent(p);
         if (parent == null) return null;
@@ -95,8 +98,9 @@ public class LinkedBinaryTree<K> implements BinaryTree<K> {
             return left(parent);
         }
     }
-
+    //check if it has children
     public boolean isExternal(Position<K> p) { return numChildren(p) == 0; }
+    //check if it is the root
     public boolean isRoot(Position<K> p) { return p == root(); }
 
     public void set(Position<K> p, K key) throws IllegalArgumentException {
@@ -176,9 +180,11 @@ public class LinkedBinaryTree<K> implements BinaryTree<K> {
             relink(newNode, right, false);
         return newNode;
     }
+
 	public String toString(){
 		return recursivePrint(root, 0);
 	}
+
 	public String recursivePrint(Node<K> node, int depth){
 		String s = "";
 		if (node.getRight() != null)
